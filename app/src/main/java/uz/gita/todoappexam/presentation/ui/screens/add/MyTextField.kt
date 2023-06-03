@@ -45,11 +45,11 @@ fun MyTextField(
             Box(
                 modifier = modifier
                     .fillMaxWidth()
-                    .clip(RoundedCornerShape(size = 16.dp))
+                    .clip(RoundedCornerShape(size = 4.dp))
                     .border(
                         width = 2.dp,
-                        color = Color(0xFFAAE9E6),
-                        shape = RoundedCornerShape(size = 16.dp)
+                        color = Color(0xFFFFC107),
+                        shape = RoundedCornerShape(size = 4.dp)
                     )
                     .padding(horizontal = 16.dp, vertical = 12.dp), // inner padding
             ) {

@@ -1,28 +1,25 @@
 package uz.gita.todoappexam.presentation.ui.contracts
 
 import kotlinx.coroutines.flow.StateFlow
-import uz.gita.todoappexam.data.model.TodoData
 import uz.gita.todoappexam.data.source.local.entity.TodoEntity
 
-interface HomeContract {
+interface AddContract {
     sealed interface Intent {
-        object OpenAddScreen:Intent
-        class DeleteTodo(val todo:TodoEntity):Intent
+        class AddTodo(val todo:TodoEntity):Intent
         object ClearMessage:Intent
-        object LoadAllItems:Intent
     }
 
     data class UiState(
-        val todos:List<TodoData> = listOf(),
         val message:String = ""
     )
 
     interface ViewModel {
         val uiState:StateFlow<UiState>
+
         fun onEventDispatcher(intent:Intent)
     }
 
     interface Direction {
-        suspend fun openAddScreen()
+        suspend fun backToHome()
     }
 }

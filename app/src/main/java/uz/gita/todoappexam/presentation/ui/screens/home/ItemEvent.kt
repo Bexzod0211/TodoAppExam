@@ -23,12 +23,12 @@ import java.util.Date
 
 
 @Composable
-fun ContactItem(
+fun ItemTodo(
     event:TodoData,
     modifier: Modifier = Modifier
 ) {
 
-    Card(modifier = modifier) {
+    Card(modifier = Modifier.padding(top = 24.dp, start = 16.dp, end = 16.dp)) {
         Row(modifier = Modifier.fillMaxWidth()) {
             Image(painter = painterResource(id = R.drawable.ic_todo), contentDescription = null,modifier= Modifier.padding(start = 16.dp).size(40.dp).align(Alignment.CenterVertically))
             Column(
@@ -74,5 +74,5 @@ fun ContactItem(
 @Composable
 @Preview
 fun ContactItemPreview() {
-    ContactItem(TodoData(id = 0,title = "Title", description = "Description", time = Date()))
+    ItemTodo(TodoData(id = 0,title = "Title", description = "Description", date = Date()))
 }

@@ -4,21 +4,18 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import uz.gita.todoappexam.navigation.AppNavigator
-import uz.gita.todoappexam.navigation.NavigationDispatcher
-import uz.gita.todoappexam.navigation.NavigationHandler
-import javax.inject.Singleton
+import uz.gita.todoappexam.presentation.direction.AddDirection
+import uz.gita.todoappexam.presentation.direction.HomeDirection
+import uz.gita.todoappexam.presentation.ui.contracts.AddContract
+import uz.gita.todoappexam.presentation.ui.contracts.HomeContract
 
 @Module
 @InstallIn(SingletonComponent::class)
 interface DirectionModule {
 
     @Binds
-    @Singleton
-    fun bindAppNavigator(impl:NavigationDispatcher):AppNavigator
+    fun bindHomeDirection(impl: HomeDirection):HomeContract.Direction
 
     @Binds
-    @Singleton
-    fun bindNavigationHandler(impl:NavigationDispatcher):NavigationHandler
-
+    fun bindAddDirection(impl:AddDirection):AddContract.Direction
 }

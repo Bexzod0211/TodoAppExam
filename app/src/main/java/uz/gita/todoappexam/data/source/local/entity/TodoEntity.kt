@@ -11,7 +11,7 @@ data class TodoEntity(
     val id:Int,
     val title:String,
     val description:String,
-    val time:Date
+    val date:Date,
 ){
-    fun toData() = TodoData(id,title,description, time)
+    fun toData() = TodoData(id,title,description, date)
 }
