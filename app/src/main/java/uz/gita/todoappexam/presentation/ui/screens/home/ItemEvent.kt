@@ -24,11 +24,11 @@ import java.util.Date
 
 @Composable
 fun ItemTodo(
-    event:TodoData,
-    modifier: Modifier = Modifier
+    item:TodoData,
+    modifier: Modifier = Modifier.padding(top = 24.dp, start = 16.dp, end = 16.dp)
 ) {
-
-    Card(modifier = Modifier.padding(top = 24.dp, start = 16.dp, end = 16.dp)) {
+//Modifier.padding(top = 24.dp, start = 16.dp, end = 16.dp)
+    Card(modifier = modifier) {
         Row(modifier = Modifier.fillMaxWidth()) {
             Image(painter = painterResource(id = R.drawable.ic_todo), contentDescription = null,modifier= Modifier.padding(start = 16.dp).size(40.dp).align(Alignment.CenterVertically))
             Column(
@@ -37,7 +37,7 @@ fun ItemTodo(
                     .padding(horizontal = 16.dp, vertical = 8.dp)
             ) {
                 Text(
-                    text = event.title,
+                    text = item.title,
                     color = Color.Black,
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Bold,
@@ -47,7 +47,7 @@ fun ItemTodo(
                 )
 
                 Text(
-                    text = event.description,
+                    text = item.description,
                     color = Color.Gray,
                     fontSize = 24.sp,
                     fontWeight = FontWeight.Bold,

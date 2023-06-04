@@ -46,6 +46,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.work.Constraints
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import androidx.work.workDataOf
@@ -93,8 +94,9 @@ fun AddTodoScreenContent(uiState: State<AddContract.UiState>, onEventDispatcher:
     var pickedDate by remember {
         mutableStateOf(LocalDate.now())
     }
+
     var pickedTime by remember {
-        mutableStateOf(LocalTime.NOON)
+        mutableStateOf(LocalTime.now())
     }
     /*
     val date = LocalDate.of(2023, 6, 5)
@@ -129,8 +131,11 @@ val combinedTime = instant.toEpochMilli()
     var submitBtnEnabling by remember {
         mutableStateOf(false)
     }
+    var disableDismiss by remember {
+        mutableStateOf(true)
+    }
 
-
+    disableDismiss = pickedDate.dayOfYear<LocalDate.now().dayOfYear
     TodoAppExamTheme {
         Surface {
             Scaffold(
@@ -268,6 +273,7 @@ val combinedTime = instant.toEpochMilli()
 
                             myLog("${durationToMillis(pickedDate,pickedTime)} : ${combinedTime - Date().time}")
 
+
                             val workRequest = OneTimeWorkRequestBuilder<MyWorker>()
                                 .setInputData(workDataOf("title" to title,"desc" to description, "id" to durationToMillis(pickedDate,pickedTime)))
                                 .setInitialDelay(duration = durationToMillis(pickedDate,pickedTime), TimeUnit.MILLISECONDS)
@@ -286,18 +292,21 @@ val combinedTime = instant.toEpochMilli()
                 MaterialDialog(
                     dialogState = dateDialogState,
                     buttons = {
-                        positiveButton(text = "Ok") {
-
+                        positiveButton(text = "Ok", disableDismiss = disableDismiss) {
+                            if (pickedDate.dayOfYear<LocalDate.now().dayOfYear){
+                                Toast.makeText(context, "Select a valid date", Toast.LENGTH_SHORT).show()
+                                return@positiveButton
+                            }
                         }
                         negativeButton(text = "Cancel")
-                    }
-                ) {
+                    }) {
                     datepicker(
                         initialDate = LocalDate.now(),
                         title = "Pick a date",
                         allowedDateValidator = {
-                            it.dayOfMonth >= LocalDate.now().dayOfMonth
-                        }
+                           it.monthValue >= LocalDate.now().monthValue
+                                   &&it.dayOfMonth >= LocalDate.now().dayOfMonth
+                        },
                     ) {
                         pickedDate = it
                     }
@@ -314,7 +323,7 @@ val combinedTime = instant.toEpochMilli()
                     timepicker(
                         initialTime = LocalTime.NOON,
                         title = "Pick a time",
-                        timeRange = LocalTime.MIDNIGHT..LocalTime.MAX
+                        timeRange = LocalTime.MIDNIGHT..LocalTime.MAX,
                     ) {
                         pickedTime = it
                     }

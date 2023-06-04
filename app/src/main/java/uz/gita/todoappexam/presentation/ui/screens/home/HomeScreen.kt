@@ -1,11 +1,11 @@
 package uz.gita.todoappexam.presentation.ui.screens.home
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -25,20 +25,22 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.androidx.AndroidScreen
 import cafe.adriel.voyager.hilt.getViewModel
-import dagger.hilt.android.AndroidEntryPoint
 import uz.gita.todoappexam.R
 import uz.gita.todoappexam.presentation.ui.contracts.HomeContract
-import uz.gita.todoappexam.presentation.ui.theme.TodoAppExamTheme
 import uz.gita.todoappexam.presentation.ui.viewmodels.HomeViewModel
+import uz.gita.todoappexam.utils.myLog
 
 class HomeScreen : AndroidScreen() {
     @Composable
@@ -85,10 +87,17 @@ fun HomeScreenContent(uiState: State<HomeContract.UiState>,onEventDispatcher:(Ho
                 .padding(padding)
                 .fillMaxSize()
         ) {
+//            Text(text = "No todos yet!", fontSize = 32.sp, modifier = Modifier
+//                .alpha(uiState.value.alphaOfPlaceholder), textAlign = TextAlign.Center)
             LazyColumn {
                 uiState.value.todos.onEach {
+                    myLog("todo $it")
                     item {
-                        ItemTodo(event = it)
+                        ItemTodo(item = it, modifier = Modifier
+                            .padding(top = 24.dp, start = 16.dp, end = 16.dp)
+                            .combinedClickable(onLongClick = {
+                                onEventDispatcher.invoke(HomeContract.Intent.DeleteTodo(it.toEntity()))
+                            }, onClick = {}))
                     }
                 }
             }

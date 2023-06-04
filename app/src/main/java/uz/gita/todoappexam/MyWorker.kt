@@ -44,20 +44,17 @@ class MyWorker(context: Context,workerParameters: WorkerParameters):Worker(conte
 
     @SuppressLint("MissingPermission")
     private fun createNotification(title:String,text: String, id: Long) {
-//        val intent = Intent(this@MainActivity, SecondActivity::class.java).apply {
-//            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-//        }
-//        val pendingIntent = PendingIntent.getActivity(this@MainActivity, 0, intent, PendingIntent.FLAG_IMMUTABLE)
         myLog("created notification")
-        /*val intent = Intent(applicationContext, MainActivity::class.java).apply {
+        val intent = Intent(applicationContext, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
-        val pendingIntent = PendingIntent.getActivity(applicationContext, 0, intent, PendingIntent.FLAG_IMMUTABLE)*/
+        val pendingIntent = PendingIntent.getActivity(applicationContext, 0, intent, PendingIntent.FLAG_IMMUTABLE)
 
         val notificationBuilder = NotificationCompat.Builder(applicationContext, CHANNEL_ID)
             .setSmallIcon(R.drawable.ic_todo)
             .setContentTitle(title)
             .setContentText(text)
+            .setContentIntent(pendingIntent)
 
         NotificationManagerCompat.from(applicationContext).notify(id.toInt(), notificationBuilder.build())
     }

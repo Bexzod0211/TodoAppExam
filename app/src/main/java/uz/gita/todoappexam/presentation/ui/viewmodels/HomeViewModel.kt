@@ -34,6 +34,18 @@ class HomeViewModel @Inject constructor(
                     }
                 }
                     .launchIn(viewModelScope)
+
+                useCase.getAllTodos().onEach {todos->
+                    if (todos.isEmpty()){
+                        uiState.update {
+                            it.copy(alphaOfPlaceholder = 1f)
+                        }
+                    }else {
+                        uiState.update {
+                            it.copy(todos = todos, alphaOfPlaceholder = 0f)
+                        }
+                    }
+                }.launchIn(viewModelScope)
             }
 
             HomeContract.Intent.ClearMessage -> {
@@ -42,10 +54,21 @@ class HomeViewModel @Inject constructor(
                 }
             }
             HomeContract.Intent.LoadAllItems->{
-                useCase.getAllTodos().onEach {todos->
-                    uiState.update {
-                        it.copy(todos = todos)
+                /*useCase.getAllTodos().onEach {todos->
+                    if (todos.isEmpty()){
+                        uiState.update {
+                            it.copy(alphaOfPlaceholder = 1f)
+                        }
+                    }else {
+                        uiState.update {
+                            it.copy(todos = todos, alphaOfPlaceholder = 0f)
+                        }
                     }
+                }.launchIn(viewModelScope)*/
+                useCase.getAllTodos().onEach {todos->
+                        uiState.update {
+                            it.copy(todos = todos, alphaOfPlaceholder = 0f)
+                        }
                 }.launchIn(viewModelScope)
             }
         }

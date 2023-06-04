@@ -14,7 +14,8 @@ interface HomeContract {
 
     data class UiState(
         val todos:List<TodoData> = listOf(),
-        val message:String = ""
+        val message:String = "",
+        val alphaOfPlaceholder:Float = 0f
     )
 
     interface ViewModel {
