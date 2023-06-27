@@ -641,6 +641,6 @@ fun durationToMillis(date: LocalDate, time: LocalTime): Long {
 @Composable
 fun AddTodoPreview() {
     AddTodoScreenContent(mutableStateOf(AddContract.UiState())) {
-        
+
     }
 }
