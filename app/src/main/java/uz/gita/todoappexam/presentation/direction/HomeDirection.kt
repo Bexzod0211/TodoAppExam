@@ -1,5 +1,6 @@
 package uz.gita.todoappexam.presentation.direction
 
+import uz.gita.todoappexam.data.model.TodoData
 import uz.gita.todoappexam.navigation.AppNavigator
 import uz.gita.todoappexam.presentation.ui.contracts.HomeContract
 import uz.gita.todoappexam.presentation.ui.screens.add.AddTodoScreen
@@ -10,5 +11,9 @@ class HomeDirection @Inject constructor(
 ) :HomeContract.Direction{
     override suspend fun openAddScreen() {
         appNavigator.navigateTo(AddTodoScreen())
+    }
+
+    override suspend fun openEditScreen(todo: TodoData) {
+        appNavigator.navigateTo(AddTodoScreen(todo))
     }
 }

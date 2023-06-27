@@ -3,6 +3,7 @@ package uz.gita.todoappexam.data.source.local.dao
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import uz.gita.todoappexam.data.model.TodoData
 import uz.gita.todoappexam.data.source.local.entity.TodoEntity
@@ -10,7 +11,7 @@ import uz.gita.todoappexam.data.source.local.entity.TodoEntity
 @Dao
 interface TodoDao {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun addTodo(todo:TodoEntity)
 
     @Query("SELECT * FROM todos")

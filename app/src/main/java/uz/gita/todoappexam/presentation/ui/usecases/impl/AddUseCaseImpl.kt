@@ -13,4 +13,8 @@ class AddUseCaseImpl @Inject constructor(
         return repository.addTodo(todo)
     }
 
+    override fun deleteTodo(todo: TodoEntity): Flow<String> {
+        return repository.deleteTodo(todo)
+    }
+
 }

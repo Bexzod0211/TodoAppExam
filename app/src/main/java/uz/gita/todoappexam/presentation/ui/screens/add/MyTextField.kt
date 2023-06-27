@@ -38,7 +38,7 @@ fun MyTextField(
         textStyle = TextStyle(
             fontSize = 20.sp,
             fontWeight = FontWeight.Medium,
-            color = Color.DarkGray
+            color = Color.White
         ),
 
         decorationBox = { innerTextField ->
@@ -48,7 +48,7 @@ fun MyTextField(
                     .clip(RoundedCornerShape(size = 4.dp))
                     .border(
                         width = 2.dp,
-                        color = Color(0xFFFFC107),
+                        color = Color(0xFF89CBFA),
                         shape = RoundedCornerShape(size = 4.dp)
                     )
                     .padding(horizontal = 16.dp, vertical = 12.dp), // inner padding

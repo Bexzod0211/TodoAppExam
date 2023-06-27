@@ -10,12 +10,13 @@ interface HomeContract {
         class DeleteTodo(val todo:TodoEntity):Intent
         object ClearMessage:Intent
         object LoadAllItems:Intent
+        class ItemClicked(val todo: TodoData):Intent
     }
 
     data class UiState(
         val todos:List<TodoData> = listOf(),
         val message:String = "",
-        val alphaOfPlaceholder:Float = 0f
+        var isPlaceHolderVisible:Boolean = true
     )
 
     interface ViewModel {
@@ -25,5 +26,6 @@ interface HomeContract {
 
     interface Direction {
         suspend fun openAddScreen()
+        suspend fun openEditScreen(todo:TodoData)
     }
 }

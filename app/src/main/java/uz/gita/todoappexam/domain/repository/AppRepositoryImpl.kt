@@ -18,7 +18,7 @@ class AppRepositoryImpl @Inject constructor(
 
     override fun addTodo(todo: TodoEntity): Flow<String> = flow{
         dao.addTodo(todo)
-        emit("Todo item has been successfully added")
+        emit("Todo item has been successfully")
     }
 
     override fun deleteTodo(todo: TodoEntity): Flow<String> = flow {

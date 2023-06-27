@@ -5,4 +5,5 @@ import uz.gita.todoappexam.data.source.local.entity.TodoEntity
 
 interface AddUseCase {
     fun addTodo(todo:TodoEntity):Flow<String>
+    fun deleteTodo(todo: TodoEntity):Flow<String>
 }

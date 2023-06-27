@@ -7,10 +7,14 @@ interface AddContract {
     sealed interface Intent {
         class AddTodo(val todo:TodoEntity):Intent
         object ClearMessage:Intent
+        object BackHomeClicked:Intent
+        object DeleteButtonClicked:Intent
+        class DeleteTodo(val todo: TodoEntity):Intent
     }
 
     data class UiState(
-        val message:String = ""
+        val message:String = "",
+        val isOpenDialog:Boolean = false
     )
 
     interface ViewModel {
