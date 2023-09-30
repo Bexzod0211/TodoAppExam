@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import uz.gita.todoappexam.R
 import uz.gita.todoappexam.data.model.TodoData
+import uz.gita.todoappexam.utils.myLog
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.LocalDateTime
@@ -44,7 +45,8 @@ fun ItemTodo(
     val yesterday = Calendar.getInstance()
     yesterday.add(Calendar.DAY_OF_YEAR, -1)
 
-    val sdf = SimpleDateFormat("dd MMM", Locale.ENGLISH)
+    val sdf = SimpleDateFormat("dd MMM", Locale.US)
+    myLog("Item date=> ${sdf.format(item.date)} || Today date ${sdf.format(today.time)}")
 
     val date = when {
         sdf.format(item.date) == sdf.format(today.time) -> {

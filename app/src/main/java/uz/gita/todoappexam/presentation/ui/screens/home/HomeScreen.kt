@@ -77,11 +77,15 @@ fun HomeScreenContent(uiState: State<HomeContract.UiState>,onEventDispatcher:(Ho
         modifier = Modifier
             .fillMaxSize(),
         topBar = {
-            TopAppBar(
+            /*  TopAppBar(
                 modifier = Modifier
                     .height(60.dp)
-                    .fillMaxWidth(), title = {
-                    Card(
+                    .fillMaxWidth(),
+                title = {*/
+            Card(
+                        modifier = Modifier
+                            .height(60.dp)
+                            .fillMaxWidth(),
                         elevation = CardDefaults
                             .cardElevation(
                                 defaultElevation = 3.dp
@@ -89,35 +93,37 @@ fun HomeScreenContent(uiState: State<HomeContract.UiState>,onEventDispatcher:(Ho
                         shape = RoundedCornerShape(0.dp)
 
                     ) {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier
-                                .background(Color(0xFF0171B5))
-                                .fillMaxWidth()
-                                .size(0.dp, 60.dp)
-                        ) {
-                            Image(
-                                modifier = Modifier
-                                    .size(30.dp),
-                                painter = painterResource(
-                                    id = R.drawable.ic_todo
-                                ),
-                                contentDescription = null
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    modifier = Modifier
+                        .background(Color(0xFF0171B5))
+                        .fillMaxWidth()
+                        .height(60.dp)
+                ) {
+                    Image(
+                        modifier = Modifier
+                            .padding(
+                                start = 16.dp
                             )
-                            Text(
-                                modifier = Modifier
-                                    .padding(
-                                        start = 16.dp
-                                    ),
-                                text = "All lists",
-                                color = Color.White,
-                                fontSize = 24.sp,
-                                fontWeight = FontWeight
-                                    .Bold
-                            )
-                        }
-                    }
-                })
+                            .size(30.dp),
+                        painter = painterResource(
+                            id = R.drawable.ic_todo
+                        ),
+                        contentDescription = null
+                    )
+                    Text(
+                        modifier = Modifier
+                            .padding(
+                                start = 16.dp
+                            ),
+                        text = "All lists",
+                        color = Color.White,
+                        fontSize = 24.sp,
+                        fontWeight = FontWeight
+                            .Bold
+                    )
+                }
+            }
         },
         floatingActionButton = {
             FloatingActionButton(
@@ -149,6 +155,8 @@ fun HomeScreenContent(uiState: State<HomeContract.UiState>,onEventDispatcher:(Ho
                 horizontalAlignment = Alignment.CenterHorizontally,
             ) {
                 Image(
+                    modifier = Modifier
+                        .size(150.dp),
                     painter = painterResource(
                         id = R.drawable.rest
                     ),

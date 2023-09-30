@@ -274,7 +274,7 @@ val combinedTime = instant.toEpochMilli()
         Surface {
             Scaffold(
                 topBar = {
-                    TopAppBar(
+                    /*TopAppBar(
                         modifier = Modifier
                             .height(60.dp)
                             .fillMaxWidth(), title = {
@@ -284,7 +284,7 @@ val combinedTime = instant.toEpochMilli()
                                         defaultElevation = 3.dp
                                     ),
                                 shape = RoundedCornerShape(0.dp)
-                            ) {
+                            ) {*/
                                 Row(
                                     verticalAlignment = Alignment.CenterVertically,
                                     modifier = Modifier
@@ -294,6 +294,9 @@ val combinedTime = instant.toEpochMilli()
                                 ) {
                                     Image(
                                         modifier = Modifier
+                                            .padding(
+                                                start = 16.dp
+                                            )
                                             .size(30.dp)
                                             .clickable {
                                                 onEventDispatcher.invoke(AddContract.Intent.BackHomeClicked)
@@ -315,9 +318,7 @@ val combinedTime = instant.toEpochMilli()
                                             .Bold
                                     )
                                 }
-                            }
-                        })
-                },
+                            },
 
                 floatingActionButton = {
                     FloatingActionButton(
